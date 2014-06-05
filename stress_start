@@ -1,0 +1,25 @@
+#!/bin/sh
+
+i=0
+
+while [ $i -le 60 ]
+do
+  echo "Start new user batch"
+
+  user_count=0
+  while [ $user_count -le 5 ]
+  do
+    echo "Create user"
+    phantomjs stress.js &
+    user_count=$(( user_count + 1 ))
+  done
+
+  echo "PAUSE a second"
+  i=$(( i + 1 ))
+  sleep 2
+
+done
+echo "Complete 1 min run"
+
+#killing all phantom process
+#pkill phantomjs
